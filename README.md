@@ -50,8 +50,7 @@ To run this project locally, follow these steps:
 2. **Install dependencies**
        ```bash
        npm run dev
-       # or
-       yarn dev
+      
 3. **Open the project in your browser**
     ```bash
     Navigate to http://localhost:3000
