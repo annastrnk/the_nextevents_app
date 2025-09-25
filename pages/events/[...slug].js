@@ -6,6 +6,7 @@ import Button from "../../components/ui/button";
 import ErrorAlert from "../../components/ui/error-alert";
 import useSWR from "swr";
 import { useEffect, useState } from "react";
+import Head from "next/head";
 
 export default function FilteredEventsPage(props) {
   const [loadedEvents, setLoadedEvents] = useState();
@@ -31,14 +32,37 @@ export default function FilteredEventsPage(props) {
     }
   }, [data]);
 
+  let pagHeadeData = (
+    <Head>
+      <title>Filtered Events</title>
+      <meta name="description" content="A list of filtered events" />
+    </Head>
+  );
+
   if (!loadedEvents) {
-    return <p className="center">Loading...</p>;
+    return (
+      <>
+        {pagHeadeData}
+        <p className="center">Loading...</p>;
+      </>
+    );
   }
+
   const filteredYear = filteredData[0];
   const filteredMonth = filteredData[1];
 
   const numYear = +filteredYear;
   const numMonth = +filteredMonth;
+
+  pagHeadeData = (
+    <Head>
+      <title>Filtered Events</title>
+      <meta
+        name="description"
+        content={`All events for ${numMonth}/${numYear}`}
+      />
+    </Head>
+  );
 
   if (
     isNaN(numYear) ||
@@ -51,6 +75,7 @@ export default function FilteredEventsPage(props) {
   ) {
     return (
       <>
+        {pagHeadeData}
         <ErrorAlert>
           <p>Invalid filter. Pleae agjust your values! </p>;
         </ErrorAlert>
@@ -75,6 +100,7 @@ export default function FilteredEventsPage(props) {
   if (!filteredEvents || filteredEvents.length === 0) {
     return (
       <>
+        {pagHeadeData}
         <ErrorAlert>
           <p>No events found for the chosen filter! </p>
         </ErrorAlert>
@@ -90,6 +116,7 @@ export default function FilteredEventsPage(props) {
 
   return (
     <div>
+      {pagHeadeData}
       <ResultTitle date={date} />
       <EventList items={filteredEvents} />
     </div>

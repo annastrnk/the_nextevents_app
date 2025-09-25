@@ -1,7 +1,7 @@
 # Next.js Page Routing (Learning Project)
 
-This is a project I created while learning **page routing** and **data fetching** in Next.js.  
-It showcases essential routing concepts (including dynamic routes and programmatic navigation) as well as different data-fetching strategies.
+This is a project I created while learning **page routing**, **data fetching**, and **Next.js optimization features**.  
+It showcases essential routing concepts (including dynamic routes and programmatic navigation), different data-fetching strategies, and best practices for optimization.
 
 ---
 
@@ -24,8 +24,34 @@ It showcases essential routing concepts (including dynamic routes and programmat
 
 ---
 
+## ⚡ Optimization Features
+
+- **Optimize images** with Next.js `<Image />` component (automatic resizing, lazy loading, WebP support)  
+- **Optimize metadata** with the `<Head />` component for dynamic titles, descriptions, and SEO improvements  
+- **Custom `_document.js`** – extended default HTML document for global meta, fonts, and structure optimizations  
+
+---
+
 ## 🛠️ Tech Stack
 
 - [Next.js (Pages Router)](https://nextjs.org/docs/pages)  
 - React  
-- JavaScript
+- JavaScript  
+
+## 🚀 Getting Started
+
+To run this project locally, follow these steps:
+
+1. **Clone the repository**  
+   ```bash
+   git clone https://github.com/your-username/nextjs-routing-learning.git
+   cd nextjs-routing-learning
+
+2. **Install dependencies**
+       ```bash
+       npm run dev
+       # or
+       yarn dev
+3. **Open the project in your browser**
+    ```bash
+    Navigate to http://localhost:3000
