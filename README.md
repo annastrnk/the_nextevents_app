@@ -48,8 +48,7 @@ To run this project locally, follow these steps:
    cd nextjs-routing-learning
 
 2. **Install dependencies**
-       ```bash
-       npm run dev
+       `npm run dev`
       
 3. **Open the project in your browser**
     ```bash
