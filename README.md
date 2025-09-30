@@ -49,7 +49,7 @@ It showcases essential routing concepts (including dynamic routes and programmat
 - Can be triggered from **any component** in the app
 - Automatically **hides notifications** after a specified duration
 
-
+---
 ## 🛠️ Tech Stack
 
 - [Next.js (Pages Router)](https://nextjs.org/docs/pages)  

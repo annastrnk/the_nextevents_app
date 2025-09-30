@@ -50,7 +50,7 @@ function Comments(props) {
         }
 
         return response.json().then((data) => {
-          throw new error(data.message || "Something went wrong!");
+          throw new Error(data.message || "Something went wrong!");
         });
       })
       .then((data) => {
@@ -75,7 +75,7 @@ function Comments(props) {
         {showComments ? "Hide" : "Show"} Comments
       </button>
       {showComments && <NewComment onAddComment={addCommentHandler} />}
-      {showComments && !isFetchingComments && <CommentList items={comments} />}
+      {showComments && !isFetchingComments && <CommentList items={comments || []} />}
       {showComments && isFetchingComments && <p>Loading...</p>}
     </section>
   );

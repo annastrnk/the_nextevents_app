@@ -31,7 +31,7 @@ function NewsletterRegistration() {
         }
 
         return response.json().then((data) => {
-          throw new error(data.message || "Something went wrong!");
+          throw new Error(data.message || "Something went wrong!");
         });
       })
       .then((data) => {

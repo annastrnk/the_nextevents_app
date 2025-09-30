@@ -26,6 +26,9 @@ async function handler(req, res) {
     }
 
     res.status(201).json({ message: "Signed up!" });
+  } else {
+    res.setHeader("Allow", ["POST"]);
+    res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }
 
