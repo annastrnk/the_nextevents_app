@@ -24,6 +24,16 @@ It showcases essential routing concepts (including dynamic routes and programmat
 
 ---
 
+## 🔌 API Routes + Database
+
+- **Static API routes** – simple handlers inside `pages/api/*.js` (e.g. `/api/newsletter`)  
+- **Dynamic API routes** – handled via `pages/api/[eventId].js`, supporting operations tied to specific IDs  
+- **Integration with MongoDB Atlas** – API routes connect to a MongoDB cluster for persistent data storage  
+  - Newsletter sign-up saves email addresses to the database  
+  - Comments feature stores and retrieves event-related comments  
+
+---
+
 ## ⚡ Optimization Features
 
 - **Optimize images** with Next.js `<Image />` component (automatic resizing, lazy loading, WebP support)  
@@ -44,11 +54,17 @@ To run this project locally, follow these steps:
 
 1. **Clone the repository**  
    ```bash
-   git clone https://github.com/your-username/nextjs-routing-learning.git
-   cd nextjs-routing-learning
+   git clone https://github.com/annastrnk/the_nextevents_app.git
+   cd the_nextevents_app
 
 2. **Install dependencies**
-       `npm run dev`
+   ```bash
+   npm install
+
+3. **Run the development server**
+   ```bash
+   npm run dev
+
       
 3. **Open the project in your browser**
     ```bash

@@ -10,7 +10,7 @@
   }
   
   .item img {
-    width: 100%;
+    width: auto;
     object-fit: cover;
     height: 10rem;
   }
