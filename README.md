@@ -42,6 +42,14 @@ It showcases essential routing concepts (including dynamic routes and programmat
 
 ---
 
+## 🔔 React Context for Notifications
+
+- **Global notification system** using React Context
+- Supports **success, error,** and **pending** messages
+- Can be triggered from **any component** in the app
+- Automatically **hides notifications** after a specified duration
+
+
 ## 🛠️ Tech Stack
 
 - [Next.js (Pages Router)](https://nextjs.org/docs/pages)  
@@ -64,7 +72,6 @@ To run this project locally, follow these steps:
 3. **Run the development server**
    ```bash
    npm run dev
-
       
 3. **Open the project in your browser**
     ```bash
