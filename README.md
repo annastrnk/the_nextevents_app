@@ -1,10 +1,10 @@
-# Next.js Page Routing (Learning Project)
+# Next.js Events App
+
+
+A full-stack Next.js application for managing and displaying events with comments and newsletter subscriptions. Built with MongoDB for data persistence and featuring a clean, service-oriented architecture.
 
 This is a project I created while learning **page routing**, **data fetching**, and **Next.js optimization features**.  
 It showcases essential routing concepts (including dynamic routes and programmatic navigation), different data-fetching strategies, and best practices for optimization.
-# Next.js Events App
-
-A full-stack Next.js application for managing and displaying events with comments and newsletter subscriptions. Built with MongoDB for data persistence and featuring a clean, service-oriented architecture.
 
 ---
 
@@ -24,6 +24,15 @@ A full-stack Next.js application for managing and displaying events with comment
 - **Dynamic pages**: `getStaticProps` + `getStaticPaths` with `fallback` for pre-rendering dynamic routes  
 - **`getServerSideProps`** – Server-Side Rendering (SSR) on every request  
 - **Client-side data fetching** – used hook `useEffect` and library `SWR` for real-time updates in the browser  
+
+---
+
+### Key Principles
+
+- **Separation of Concerns**: Business logic separated from UI and API routes
+- **Service Layer**: All database operations handled through service functions
+- **Reusability**: Services can be used from pages, API routes, or scripts
+- **Maintainability**: Clear structure makes code easy to navigate and modif
 
 ---
 
