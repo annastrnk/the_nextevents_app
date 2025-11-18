@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useCallback } from "react";
 
 import CommentList from "./comment-list";
 import NewComment from "./new-comment";
@@ -14,17 +14,30 @@ function Comments(props) {
 
   const notificationCtx = useContext(NotificationContext);
 
+  const fetchComments = useCallback(async () => {
+    if (!eventId) return;
+    
+    setIsFetchingComments(true);
+    try {
+      const response = await fetch("/api/comments/" + eventId);
+      if (!response.ok) {
+        throw new Error("Failed to fetch comments");
+      }
+      const data = await response.json();
+      setComments(data.comments || []);
+    } catch (error) {
+      console.error("Error fetching comments:", error);
+      setComments([]);
+    } finally {
+      setIsFetchingComments(false);
+    }
+  }, [eventId]);
+
   useEffect(() => {
     if (showComments) {
-      setIsFetchingComments(true);
-      fetch("/api/comments/" + eventId).then((response) =>
-        response.json().then((data) => {
-          setComments(data.comments);
-          setIsFetchingComments(false);
-        })
-      );
+      fetchComments();
     }
-  }, [showComments]);
+  }, [showComments, fetchComments]);
 
   function toggleCommentsHandler() {
     setShowComments((prevStatus) => !prevStatus);
@@ -59,11 +72,13 @@ function Comments(props) {
           message: "Your comment was saved!",
           status: "success",
         });
+        fetchComments();
       })
       .catch((error) => {
+        console.error("Error adding comment:", error);
         notificationCtx.showNotification({
           title: "Error!",
-          message: "Something went wrong!",
+          message: error.message || "Something went wrong!",
           status: "error",
         });
       });

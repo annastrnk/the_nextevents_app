@@ -1,4 +1,4 @@
-import { getEventById, getFeaturedEvents } from "../../helpers/api-utils";
+import { getEventById, getFeaturedEvents } from "../../lib/services/events";
 import EventSummary from "../../components/event-detail/event-summary";
 import EventLogistics from "../../components/event-detail/event-logistics";
 import EventContent from "../../components/event-detail/event-content";
@@ -11,10 +11,7 @@ export default function EventDetailPage(props) {
 
   if (!event) {
     return (
-      //   <ErrorAlert>
-      //     <p>No event found</p>
-      //   </ErrorAlert>
-      // );
+
       <div className="center">
         <p>Loading...</p>
       </div>
@@ -46,9 +43,9 @@ export default function EventDetailPage(props) {
 }
 
 export async function getStaticProps(context) {
-  const evenId = context.params.eventId;
+  const eventId = context.params.eventId;
 
-  const event = await getEventById(evenId);
+  const event = await getEventById(eventId);
   return {
     props: {
       selectedEvent: event,

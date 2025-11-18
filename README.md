@@ -2,16 +2,19 @@
 
 This is a project I created while learning **page routing**, **data fetching**, and **Next.js optimization features**.  
 It showcases essential routing concepts (including dynamic routes and programmatic navigation), different data-fetching strategies, and best practices for optimization.
+# Next.js Events App
+
+A full-stack Next.js application for managing and displaying events with comments and newsletter subscriptions. Built with MongoDB for data persistence and featuring a clean, service-oriented architecture.
 
 ---
 
 ## 🚏 Routing Essentials
 
 - **Basic page routing** with the `pages/` directory  
-- **Dynamic routes** using `[...slug].js`  
-- **Nested dynamic routes** using `[eventId].js`  
+- **Dynamic routes** using `[...slug].js` for filtered event views
+- **Nested dynamic routes** using `[eventId].js` for event detail pages
 - **useRouter() hook** to access route parameters  
-- **Programmatic navigation** (`router.push()` / `router.replace()` for redirects)  
+- **Programmatic navigation** (`router.push()` / `router.replace()`)
 
 ---
 

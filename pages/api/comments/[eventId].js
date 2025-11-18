@@ -1,64 +1,45 @@
-import {
-  connectDataBase,
-  getAllDocuments,
-  inserDocument,
-} from "../../../helpers/db-utils";
+import { getCommentsByEventId, createComment } from "../../../lib/services/comments";
 
 async function handler(req, res) {
-  const eventId = req.query.eventId;
+  const { eventId } = req.query;
 
-  let client;
+  if (!eventId) {
+    return res.status(400).json({ message: "Event ID is required" });
+  }
 
-  try {
-    client = await connectDataBase();
-  } catch (error) {
-    res.status(500).json({ message: "Connecting to the database failed!" });
-    return;
+  if (req.method === "GET") {
+    try {
+      const comments = await getCommentsByEventId(eventId);
+      return res.status(200).json({ comments });
+    } catch (error) {
+      console.error("Error getting comments:", error);
+      return res.status(500).json({
+        message: "Failed to get comments",
+        error: process.env.NODE_ENV === "development" ? error.message : undefined,
+      });
+    }
   }
 
   if (req.method === "POST") {
-    const { email, name, text } = req.body;
-    if (
-      !email.includes("@") ||
-      !name ||
-      name.trim() === "" ||
-      !text ||
-      text.trim() === ""
-    ) {
-      res.status(422).json({ message: "Invalid input" });
-      client.close();
-      return;
-    }
-
-    const newComment = {
-      email,
-      name,
-      text,
-      eventId,
-    };
-
-    let result;
     try {
-      result = await inserDocument(client, "comments", newComment);
-      newComment._id = result.insertedId;
-      res.status(201).json({ message: "Added comment", comment: newComment });
+      const { email, name, text } = req.body;
+      const comment = await createComment({ email, name, text, eventId });
+      return res.status(201).json({
+        message: "Comment added successfully",
+        comment,
+      });
     } catch (error) {
-      res.status(422).json({ message: "Inserting comment failed!" });
-      return;
+      console.error("Error creating comment:", error);
+      const statusCode = error.message.includes("Invalid") || error.message.includes("required") ? 422 : 500;
+      return res.status(statusCode).json({
+        message: error.message || "Failed to create comment",
+        error: process.env.NODE_ENV === "development" ? error.message : undefined,
+      });
     }
-  } else if (req.method === "GET") {
-    try {
-      const documents = await getAllDocuments(client, "comments", { _id: -1 }, {eventId});
-      res.status(200).json({ comments: documents });
-    } catch (error) {
-      res.status(422).json({ message: "Getting comments failed!" });
-    }
-  }else {
-    res.setHeader("Allow", ["GET", "POST"]);
-    res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 
-  client.close();
+  res.setHeader("Allow", ["GET", "POST"]);
+  return res.status(405).end(`Method ${req.method} Not Allowed`);
 }
 
 export default handler;
